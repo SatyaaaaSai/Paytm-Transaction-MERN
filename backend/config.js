@@ -1,3 +1,3 @@
 module.exports={
-    JWT_TOKEN:"1234321"
+    JWT_TOKEN:"satya07"
 }

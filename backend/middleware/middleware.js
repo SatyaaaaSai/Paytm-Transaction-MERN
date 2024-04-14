@@ -1,19 +1,22 @@
-const jwt = require("jwt");
+const jwt = require("jsonwebtoken");
 const { JWT_TOKEN } = require("../config");
 const authMiddleWare = (req, res, next) => {
   const authToken = req.headers.authorization;
-  if (!authToken || authToken.startswith("Bearer ")) {
+  console.log("Auth token: " + authToken);
+  if (!authToken || !authToken.startsWith("Bearer")) {
     return res.status(401).json({});
   }
-  const token = authToken.split("")[1];
+  const token = authToken.split(" ")[1];
+  console.log("Token: " + token);
   try {
     const decoded = jwt.verify(token, JWT_TOKEN);
-    req.userId = decoded.id;
+    req.userId = decoded.userId;
     next();
   } catch (err) {
     return res.status(401).json({});
   }
-  module.exports = {
-    authMiddleWare,
-  };
+};
+
+module.exports = {
+  authMiddleWare,
 };
