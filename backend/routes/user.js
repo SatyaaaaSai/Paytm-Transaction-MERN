@@ -9,9 +9,10 @@ const { authMiddleware } = require("../middleware/middleware");
 
 console.log("jwt key is ", JWT_TOKEN);
 router.post("/signup", async (req, res) => {
-  console.log(req.body);
   const { success } = schema.safeParse(req.body);
+  console.log("in parsed ");
   console.log(success);
+  console.log(req.body);
   if (!success) {
     return res.status(411).json({
       message: "Message already Taken/Incorrect Inputs ",
@@ -23,15 +24,15 @@ router.post("/signup", async (req, res) => {
   });
   if (existingUser) {
     return res.status(411).json({
-      message: "Message already Taken/Incorrect Inputs ",
+      message: "User Already Exists", 
     });
   }
 
   const newUser = await User.create({
-    username: req.body.username,
-    password: req.body.password,
     firstname: req.body.firstname,
     lastname: req.body.lastname,
+    username: req.body.username,
+    password: req.body.password
   });
 
   console.log("after taking newUser");
@@ -135,8 +136,8 @@ router.get("/bulk", async (req, res) => {
     users: users.map((user) => ({
       id: user._id,
       username: user.username,
-      firstName: user.firstName,
-      lastName: user.lastName,
+      firstName: user.firstname,
+      lastName: user.lastname,
     })),
   });
 });

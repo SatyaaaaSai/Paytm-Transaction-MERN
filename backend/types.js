@@ -1,11 +1,12 @@
 const zod = require("zod");
 
 const schema = zod.object({
-  username: zod.string(),
-  password: zod.string(),
   firstname: zod.string(),
   lastname: zod.string(),
+  username: zod.string(),
+  password: zod.string(),
 });
+console.log("in types");
 const signInSchema = zod.object({
   username: zod.string(),
   password: zod.string(),

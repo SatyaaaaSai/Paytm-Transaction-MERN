@@ -5,20 +5,6 @@ mongoose.connect(
 );
 
 const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    required: true,
-    unique: true,
-    trim: true,
-    lowercase: true,
-    minLength: 3,
-    maxLength: 30,
-  },
-  password: {
-    type: String,
-    required: true,
-    minLength: 6,
-  },
   firstname: {
     type: String,
     required: true,
@@ -30,6 +16,19 @@ const userSchema = new mongoose.Schema({
     required: true,
     trim: true,
     maxLength: 50,
+  },
+  username: {
+    type: String,
+    required: true,
+    unique: true,
+    trim: true,
+    minLength: 3,
+    maxLength: 30,
+  },
+  password: {
+    type: String,
+    required: true,
+    minLength: 6,
   },
 });
 
@@ -54,3 +53,7 @@ module.exports = {
   User,
   Account,
 };
+
+
+
+
